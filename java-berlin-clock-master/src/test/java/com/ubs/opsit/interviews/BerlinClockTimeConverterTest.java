@@ -9,7 +9,7 @@ public class BerlinClockTimeConverterTest {
     private BerlinClockTimeConverter timeConverter;
 
     @Before
-    public void init(){
+    public void init() {
         timeConverter = new BerlinClockTimeConverter();
     }
 
@@ -263,5 +263,22 @@ public class BerlinClockTimeConverterTest {
         Assert.assertEquals("YYOO", timeConverter.getBottomMinutesRow(57));
         Assert.assertEquals("YYYO", timeConverter.getBottomMinutesRow(58));
         Assert.assertEquals("YYYY", timeConverter.getBottomMinutesRow(59));
+    }
+
+    @Test
+    public void testConvertTime() {
+        Assert.assertEquals("Y\r\nOOOO\r\nOOOO\r\nOOOOOOOOOOO\r\nOOOO", timeConverter.convertTime("00:00:00"));
+        Assert.assertEquals("O\r\nOOOO\r\nROOO\r\nOOOOOOOOOOO\r\nYOOO", timeConverter.convertTime("01:01:01"));
+        Assert.assertEquals("Y\r\nROOO\r\nROOO\r\nYOOOOOOOOOO\r\nYOOO", timeConverter.convertTime("06:06:06"));
+        Assert.assertEquals("Y\r\nRROO\r\nRROO\r\nYYOOOOOOOOO\r\nYYOO", timeConverter.convertTime("12:12:12"));
+        Assert.assertEquals("O\r\nRRRO\r\nOOOO\r\nYYROOOOOOOO\r\nOOOO", timeConverter.convertTime("15:15:15"));
+        Assert.assertEquals("O\r\nRRRO\r\nRRRR\r\nYYROOOOOOOO\r\nYYYY", timeConverter.convertTime("19:19:19"));
+        Assert.assertEquals("Y\r\nRRRR\r\nOOOO\r\nYYRYOOOOOOO\r\nOOOO", timeConverter.convertTime("20:20:20"));
+        Assert.assertEquals("O\r\nRRRR\r\nROOO\r\nYYRYOOOOOOO\r\nYOOO", timeConverter.convertTime("21:21:21"));
+        Assert.assertEquals("Y\r\nRRRR\r\nRROO\r\nYYRYOOOOOOO\r\nYYOO", timeConverter.convertTime("22:22:22"));
+        Assert.assertEquals("O\r\nRRRR\r\nRRRO\r\nYYRYOOOOOOO\r\nYYYO", timeConverter.convertTime("23:23:23"));
+        Assert.assertEquals("O\r\nRRRR\r\nRRRO\r\nYYRYYRYYRYY\r\nYYYY", timeConverter.convertTime("23:59:59"));
+
+
     }
 }
